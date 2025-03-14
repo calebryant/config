@@ -1,0 +1,22 @@
+# Environment variables
+export DESKTOP="$HOME/Desktop"
+export DOWNLOADS="$HOME/Downloads"
+export ONEDRIVE="$HOME/Library/CloudStorage/OneDrive-Foresite"
+export GDRIVE="$HOME/Library/CloudStorage/GoogleDrive-caleb.bryant@foresite.com/My Drive"
+export CODE="$HOME/Code"
+export FORESITEMSSP="$CODE/ForesiteMSSP"
+export PARSERS="$FORESITEMSSP/google-secops-parsers/parsers"
+export GOPATH=$HOME/go
+export GOPRIVATE=github.com/ForesiteMSSP
+export PATH=$PATH:$GOPATH/bin
+
+# Aliases
+alias secrets="gcloud secrets versions access latest"
+alias date='date -u +"%Y-%m-%dT%H:%M:%SZ"'
+
+# Functions
+set-customer() {
+    export SECOPS_INSTANCE=$(cat $HOME/.config/secops/customers.yaml | yq ".customers.[] | select(.customerName==\"$1\") | .id")
+    export SECOPS_REGION="us"
+    export SECOPS_PROJECT="$1-chronicle"
+}
